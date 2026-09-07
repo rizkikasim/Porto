@@ -1,11 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-// --- Icons ---
-const LogoMark = ({ className = "w-5 h-5", color = "currentColor" }: { className?: string; color?: string }) => (
-  <svg className={className} viewBox="0 0 48 48" fill={color}>
-    <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
-  </svg>
-);
+import React, { useEffect, useRef } from 'react';
 
 const ArrowUpRight = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -13,19 +6,6 @@ const ArrowUpRight = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-const StarIcon = () => (
-  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-    <path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z" />
-  </svg>
-);
-
-const GridIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-    <path d="M4 6h16M4 12h16M4 18h16" />
-  </svg>
-);
-
-// --- Custom Hook Liquid Canvas Reveal ---
 function useLiquidCanvas(containerRef: React.RefObject<HTMLDivElement | null>) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -41,7 +21,6 @@ function useLiquidCanvas(containerRef: React.RefObject<HTMLDivElement | null>) {
     const decay = 0.016;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Gambar after (kacamata / neon orange) yang direveal kuas
     const afterImg = new Image();
     afterImg.src = '/after.png';
 
@@ -172,29 +151,9 @@ function useLiquidCanvas(containerRef: React.RefObject<HTMLDivElement | null>) {
   return canvasRef;
 }
 
-export default function HeroSection() {
+export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useLiquidCanvas(containerRef);
-
-  const [time, setTime] = useState("9:41am");
-  const [date, setDate] = useState("5 September, 2026");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const rawHours = now.getHours();
-      const hours = rawHours % 12 || 12;
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const meridiem = rawHours >= 12 ? 'pm' : 'am';
-      setTime(`${hours}:${minutes}${meridiem}`);
-
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      setDate(`${now.getDate()} ${months[now.getMonth()]}, ${now.getFullYear()}`);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section 
@@ -219,42 +178,9 @@ export default function HeroSection() {
       {/* 3. Contrast Vignette Overlay */}
       <div className="absolute inset-0 z-[2] pointer-events-none bg-gradient-to-b from-black/50 via-transparent to-black/70" />
 
-
-      {/* 5. Header Bar Overlay */}
-      <header className="absolute inset-x-0 top-0 z-50">
-        <div className="max-w-[88rem] mx-auto flex items-center justify-between gap-6 p-5 sm:px-8 sm:py-7">
-          <a href="#home" className="flex items-center gap-2 text-lg font-semibold tracking-tight hover:scale-105 transition-transform duration-300">
-            <LogoMark className="w-5 h-5" color="#cf8047" />
-            <span className="text-white">Kasim.dev</span>
-          </a>
-
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-white/80">
-            <a href="#home" className="text-white font-semibold hover:-translate-y-0.5 transition-transform">Home</a>
-            <a href="#works" className="hover:text-white hover:-translate-y-0.5 transition-transform">Projects</a>
-            <a href="#about" className="hover:text-white hover:-translate-y-0.5 transition-transform">About</a>
-            <a href="#contact" className="hover:text-white hover:-translate-y-0.5 transition-transform">Contact</a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            {/* <div className="hidden md:flex items-center border border-white/15 bg-black/40 backdrop-blur-md rounded-xl px-3.5 py-2 gap-3 text-xs text-white/80 shadow-sm">
-              <span className="text-white/45">Local time</span>
-              <span className="tabular-nums font-medium text-white min-w-[3.5rem]">{time}</span>
-              <span className="text-white/30">•</span>
-              <span className="font-medium text-white">{date}</span>
-            </div> */}
-
-            <button className="flex items-center gap-1.5 border border-white/15 bg-black/40 backdrop-blur-md hover:bg-black/60 rounded-xl px-4 py-2 text-xs font-medium uppercase tracking-wider text-white transition-all duration-300">
-              <GridIcon />
-              <span className="hidden sm:inline">Menu</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* 6. Content Grid */}
+      {/* 4. Content Grid */}
       <div className="relative z-20 max-w-[88rem] mx-auto flex flex-col justify-between min-h-screen pt-28 pb-16 px-5 sm:px-8 lg:grid lg:grid-cols-12 lg:gap-10 lg:pt-36 lg:pb-16">
-        
-        {/* Empty Column Kiri (Memberikan ruang pandang untuk wajah di foto) */}
+        {/* Empty Column Kiri */}
         <div className="hidden lg:block lg:col-span-5" />
 
         {/* Right Column: Heading & CTAs */}
@@ -270,45 +196,32 @@ export default function HeroSection() {
             Muhamad Rizki Kasim.
           </h1>
           <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-[34ch] text-left lg:text-right font-normal">
-  Building modern applications through elegant <span className="text-white font-medium">Flutter</span> interfaces, robust <span className="text-white font-medium">Laravel</span> backends, and applied I/IoT research.
-</p>
+            Building modern applications through elegant <span className="text-white font-medium">Flutter</span> interfaces, robust <span className="text-white font-medium">Laravel</span> backends, and applied AI/IoT research.
+          </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-start lg:justify-end gap-3 pt-2">
             <a
-              href="#contact"
+              href="#projects"
               className="inline-flex items-center gap-3 rounded-full bg-white text-ink py-1.5 pl-6 pr-1.5 text-sm font-medium hover:scale-[1.04] transition-transform duration-300 group"
             >
-              <span>Explor Project</span>
+              <span>Explore Projects</span>
               <span className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
                 <ArrowUpRight />
               </span>
             </a>
 
             <a
-              href="#works"
+              href="#contact"
               className="inline-flex items-center rounded-full border border-white/20 bg-black/30 backdrop-blur-sm hover:bg-white/10 text-white py-3 px-7 text-sm font-medium hover:scale-[1.04] transition-all duration-300"
             >
-              Download Resume
+              Get in Touch
             </a>
           </div>
         </div>
-
       </div>
-
-      {/* 7. Bottom Status Bar */}
-      {/* <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/10 bg-black/40 backdrop-blur-sm">
-        <div className="max-w-[88rem] mx-auto flex items-center justify-between p-5 sm:px-8 text-xs font-medium uppercase tracking-wider text-white/60">
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
-            Open for opportunities
-          </span>
-          <span className="hidden sm:inline">Based in Bandung, Indonesia</span>
-          <span className="inline-flex items-center gap-2">
-            Scroll to explore <span>↓</span>
-          </span>
-        </div>
-      </div> */}
     </section>
   );
-}
+};
+
+export default HeroSection;
