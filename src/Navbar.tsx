@@ -21,10 +21,14 @@ export const Navbar: React.FC = () => {
         {/* Brand Logo */}
         <a
           href="#home"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight hover:scale-105 transition-transform duration-300"
+          className="flex items-center gap-3.5 text-xl font-semibold tracking-tight hover:scale-105 transition-transform duration-300"
         >
-          <LogoMark className="w-5 h-5" color="#cf8047" />
-          <span className="text-white font-sans">Kasim.dev</span>
+          {/* <img 
+            // src="" 
+            // alt="MRK Logo" 
+            className="w-11 h-11 sm:w-12 sm:h-12 object-contain shrink-0"
+          /> */}
+          <span className="text-white font-sans">Kasim <span className="text-[#cf8047]">.dev</span></span>
         </a>
 
         {/* Navigation Items */}
