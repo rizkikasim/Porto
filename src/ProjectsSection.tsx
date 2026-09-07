@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, ArrowUpRight, ExternalLink, Layers } from 'lucide-react';
+import { ArrowUpRight, Layers } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 
 interface ProjectItem {
@@ -16,7 +16,7 @@ interface ProjectItem {
 }
 
 const PROJECTS: ProjectItem[] = [
-{
+  {
     id: 'travel-kuy',
     title: 'Travel Kuy — Tour & Booking App',
     category: 'Mobile & Backend API',
@@ -24,7 +24,7 @@ const PROJECTS: ProjectItem[] = [
     summary:
       'A streamlined travel booking platform engineered with a Flutter cross-platform front-end and a secure, role-based Laravel REST API with automated payment orchestration.',
     tech: ['Flutter', 'Laravel', 'REST API', 'MySQL'],
-    image: '/travelkuy.png', // <-- pastikan path ini mengarah ke file di folder public
+    image: '/travelkuy.png',
     githubUrl: 'https://github.com/kasim',
     liveUrl: '#',
     featured: true,
@@ -237,16 +237,16 @@ export const ProjectsSection: React.FC = () => {
                       )}
 
                       {project.githubUrl && (
-  <a
-    href={project.githubUrl}
-    target="_blank"
-    rel="noreferrer"
-    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-zinc-300 hover:text-white hover:border-white/20 transition-all"
-  >
-    <SiGithub className="w-3.5 h-3.5" />
-    <span>Code Repository</span>
-  </a>
-)}
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-zinc-300 hover:text-white hover:border-white/20 transition-all"
+                        >
+                          <SiGithub className="w-3.5 h-3.5" />
+                          <span>Code Repository</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
