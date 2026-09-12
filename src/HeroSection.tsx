@@ -212,10 +212,13 @@ export const HeroSection: React.FC = () => {
             </a>
 
             <a
-              href="#contact"
+              href="/cv-muhamad-rizki.pdf"
+              download="CV_MUHAMAD RIZKI KASIM.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center rounded-full border border-white/20 bg-black/30 backdrop-blur-sm hover:bg-white/10 text-white py-3 px-7 text-sm font-medium hover:scale-[1.04] transition-all duration-300"
             >
-              Get in Touch
+              Download Resume
             </a>
           </div>
         </div>
